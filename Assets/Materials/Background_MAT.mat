@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Planet_MAT
+  m_Name: Background_MAT
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
@@ -35,13 +35,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 10, y: 10}
-        m_Offset: {x: 0, y: 0}
+        m_Texture: {fileID: 2800000, guid: ab4d7c63667b04849b1abd496a33cff8, type: 3}
+        m_Scale: {x: 1, y: 0.62}
+        m_Offset: {x: -0.95, y: 0.96}
     - _MainTex:
-        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 10, y: 10}
-        m_Offset: {x: 0, y: 0}
+        m_Texture: {fileID: 2800000, guid: 043db828327614d5080e0a4c68f7db0f, type: 3}
+        m_Scale: {x: 1, y: 0.62}
+        m_Offset: {x: -0.95, y: 0.96}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -72,5 +72,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.1509434, g: 0.1509434, b: 0.1509434, a: 1}
+    - _Color: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
+    - _EmissionColor: {r: 0.23621131, g: 0, b: 0.4245283, a: 1}
