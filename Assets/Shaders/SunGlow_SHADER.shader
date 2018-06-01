@@ -57,17 +57,10 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				
-				// Get the distance to the center (0,0,0)
-				//float dis = distance(i.vertex.xyz, float3(0,0,0)) * 0.001;
-				
-				//float2 offset = float2(_SinTime.z, 0.0) * 0.1;
-				
-				
-				//fixed4 offsetTex  = tex2D(_MainTex, i.uv + float2(_SinTime.x * dis, _SinTime.x * dis));
-				//float2 offset = float2(offsetTex.a, offsetTex.a) * 0.1;
-				
+				// Calculate distance to center of the quad
 			    float dis = distance(i.uv, float2(0.5, 0.5)) * 2.5;
-
+                
+                // Fade color out based on distance
 				fixed4 col = fixed4(_Color.r, _Color.g, _Color.b, (1-dis)*0.5);
 				return col;
 				

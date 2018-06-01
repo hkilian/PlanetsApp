@@ -22,7 +22,9 @@ public class Ring : MonoBehaviour {
 		LineRenderer lineRenderer = GetComponent<LineRenderer>();
 
 		float radius = Vector3.Distance(new Vector3(0, 0, 0), transform.position);
-		int totalPoints = 50;
+		int totalPoints = 150;
+
+		lineRenderer.positionCount = totalPoints;
 		
 		var points = new Vector3[totalPoints];
 		for (int i = 0; i < totalPoints; i++) {
