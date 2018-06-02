@@ -3,7 +3,8 @@
     Properties {
         // Color property for material inspector, default to white
         _Color("Color", Color) = (0.2,0.2,1,1)
-        _Fade("Fade", float) = 1.0
+        _ScaleFade("_ScaleFade", float) = 1.0
+        _DistanceFade("_DistanceFade", float) = 1.0
     }
 
     SubShader {
@@ -18,7 +19,9 @@
             #include "UnityCG.cginc"
             
             fixed4 _Color;
-            float _Fade;
+            float _ScaleFade;
+            float _DistanceFade;
+            float _FadeT;
             
             struct appdata {
                 float4 vertex : POSITION;
@@ -38,8 +41,10 @@
             // pixel shader
             fixed4 frag(v2f i) : SV_Target {
             
-                float distance = abs(i.worldPos.z * _Fade * 0.01);
-                float alpha = 1.0-distance;
+                float fade = lerp(_ScaleFade, _DistanceFade, clamp(_FadeT, 0, 1));
+                
+                float distance = abs(i.worldPos.z * pow(fade, 7) * 0.001);
+                float alpha = 1.0 - distance;
                     
                 return fixed4(_Color.rgb, alpha * _Color.a);
                 

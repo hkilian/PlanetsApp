@@ -17,20 +17,19 @@ public class CelestialObject : MonoBehaviour {
 	// Our order in the solar system
 	public int Order {get;set;}
 	
-	// Our order in the solar system
+	// Distance between Celestial objects when in scale compare mode
 	private float _scaleModeSpacer = 30;
 	public float ScaleModeSpacer {
 		get { return _scaleModeSpacer; }
 		set { 
 			_scaleModeSpacer = value;
-			UpdatePosition();
 		}
 	}
 	
-	// Planet model
+	// This objects 3d model
 	private GameObject _model;
 
-	// Use this for initialization
+	// Runs before anything else
 	void Awake () {
 				
 		_model = transform.Find("Model").gameObject;
@@ -81,12 +80,34 @@ public class CelestialObject : MonoBehaviour {
 		}
 
 	}
-	
-	// Runs when our CelestialObjectData has been modified, sets correct position
-	void UpdatePosition() {
 
-		SetViewMode(GameController.CurrentViewMode);
+	// 0 being Scale mode and 1 being distance mode
+	public void LerpViewMode(float t) {
+		
+		Vector3 position = transform.position;
+		
+		// Scale mode values
+		float scalePositionX = (130) + ((Order + 1) * _scaleModeSpacer);
+		float scaleLineWidth = 0.4f;
+		float scaleModeScale = _data.size / 5000.0f;
+		
+		// Distance mode values
+		float distancePositionX = _data.distance * GameController.DistanceMultiplier;
+		float distanceLineWidth = 10.0f;
+		float distanceModeScale = _data.size / 5000.0f;
+		
+		// Interpolate between
+		GetComponent<LineRenderer>().enabled = true;
+		GetComponent<LineRenderer>().widthMultiplier = Mathf.Lerp(scaleLineWidth, distanceLineWidth, t);
+		transform.position = new Vector3(Mathf.Lerp(scalePositionX, distancePositionX, t), 0, 0);
 
+		float scale = Mathf.Lerp(scaleModeScale, distanceModeScale, t);
+		_model.transform.localScale = new Vector3(scale, scale, scale);
+		
+		// Set orbit fade t globally
+		Shader.SetGlobalFloat("_FadeT", t);	
+		
 	}
+	
 	
 }

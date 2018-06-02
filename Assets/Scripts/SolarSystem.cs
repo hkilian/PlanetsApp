@@ -13,6 +13,9 @@ public class SolarSystem : MonoBehaviour {
 	// Prefab to use as celestial object
 	public GameObject celestialObjectPrefab;
 	
+	// Orbit shader for updating t when lerping
+	public Shader orbitShader;
+	
 	// Distance between CelestialObjects when in scale mode
 	public float scaleModeSpacer = 30;
 	
@@ -31,8 +34,8 @@ public class SolarSystem : MonoBehaviour {
 	// Refrence to the sun
 	private GameObject _sun;
 
-	// Use this for initialization
-	void Start () {
+	// Initialization
+	public void Init() {
 		
 		// Load in the data for celestial objects from json
 		LoadSolarSystemData();
@@ -57,7 +60,19 @@ public class SolarSystem : MonoBehaviour {
 			}
 			
 		}
+
+	}
+	
+	// Lerp between scale and distance modes
+	public void LerpBetweenViewModes(float t) {
 		
+		// Interpolate between modes
+		LerpViewModeSun(t);
+		
+		for (var i = 0; i < _celestialObjects.Count; i++) {
+			_celestialObjects[i].GetComponent<CelestialObject>().LerpViewMode(t);
+		}
+				
 	}
 	
 	// Loads CelestialObjectData from json
@@ -103,10 +118,24 @@ public class SolarSystem : MonoBehaviour {
 		}
 		
 	}
+	
+	// Lerp between view modes for sun
+	private void LerpViewModeSun(float t) {
+		
+		// Set scale of sun for each view mode
+		float scaleSunSize = 250;
+		float distanceSunScale = scaleSunSize * GameController.DistanceMultiplier / 1000;
+
+		// Lerp between
+		float scale = Mathf.Lerp(scaleSunSize, distanceSunScale, t);
+		_sun.transform.localScale = new Vector3(scale, scale, scale);
+		
+	}
 
 	// Change the viewing mode
 	public void SetViewMode(GameController.ViewMode mode) {
 
+		/*
 		// Set scale of sun for each view mode
 		float sunSize = 250;
 		if (mode == GameController.ViewMode.ScaleCompare) {
@@ -125,7 +154,8 @@ public class SolarSystem : MonoBehaviour {
 		for (var i = 0; i < _celestialObjects.Count; i++) {
 			_celestialObjects[i].GetComponent<CelestialObject>().SetViewMode(mode);
 		}
-
+		*/
+		
 	}
 	
 }

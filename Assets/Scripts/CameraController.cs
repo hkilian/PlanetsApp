@@ -19,7 +19,12 @@ public class CameraController : MonoBehaviour {
 	// Same as above but for distance mode
 	public float DistanceFurthestObjectSpacer = 500.0f;
 	public float DistanceSunSpacer = 500.0f;
+
 	[Space(10)]
+
+	// Used for lerping between modes
+	private float furthestObjectSpacer = 0;
+	private float sunSpacer = 0;
 	
 	// Zoom level (Scale Mode)
 	public float zoomLevel = 1.0f;
@@ -32,19 +37,18 @@ public class CameraController : MonoBehaviour {
 
 	}
 	
+	// Lerp between scale and distance modes
+	public void LerpBetweenViewModes(float t) {
+
+		furthestObjectSpacer = Mathf.Lerp(ScaleFurthestObjectSpacer, DistanceFurthestObjectSpacer, t);
+		sunSpacer = Mathf.Lerp(ScaleSunSpacer, DistanceSunSpacer, t);
+
+	}
+
 	// Update is called once per frame
 	void Update () {
 			
 		DrawDebugLines();
-		
-		// Set spacers for current mode
-		float furthestObjectSpacer = ScaleFurthestObjectSpacer;
-		float sunSpacer = ScaleSunSpacer;
-
-		if (GameController.CurrentViewMode == GameController.ViewMode.DistanceCompare) {
-			furthestObjectSpacer = DistanceFurthestObjectSpacer;
-			sunSpacer = DistanceSunSpacer;
-		}
 				
 		Vector3 position = transform.position;
 		float orthoHeight = 270;
