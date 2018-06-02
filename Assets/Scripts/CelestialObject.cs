@@ -46,25 +46,46 @@ public class CelestialObject : MonoBehaviour {
 	}
 	
 	// Set mode
-	public void SetMode() {
-		
-		Vector3 position = transform.position;
-		position.x = 140 + ((Order + 1) * _scaleModeSpacer);
+	public void SetViewMode(GameController.ViewMode mode) {
 
-		transform.position = position;
+		if (mode == GameController.ViewMode.ScaleCompare) {
+			
+			/* SCALE MODE */
+			
+			Vector3 position = transform.position;
+			position.x = (130) + ((Order + 1) * _scaleModeSpacer);
+			transform.position = position;
 
-		GetComponent<LineRenderer>().enabled = true;
-		
-		// Set size
-		float scale = _data.size / 5000.0f;
-		_model.transform.localScale = new Vector3(scale, scale, scale);
+			GetComponent<LineRenderer>().enabled = true;
+			GetComponent<LineRenderer>().widthMultiplier = 0.4f;
+
+			// Set size
+			float scale = _data.size / 5000.0f;
+			_model.transform.localScale = new Vector3(scale, scale, scale);
+			
+		} else if (mode == GameController.ViewMode.DistanceCompare) {
+			
+			/* DISTANCE MODE */
+			
+			Vector3 position = transform.position;
+			position.x = _data.distance * GameController.DistanceMultiplier;
+			transform.position = position;
+
+			GetComponent<LineRenderer>().enabled = true;
+			GetComponent<LineRenderer>().widthMultiplier = 10.0f;
+				
+			// Set size
+			float scale = _data.size / 5000.0f;
+			_model.transform.localScale = new Vector3(scale, scale, scale);
+			
+		}
 
 	}
 	
 	// Runs when our CelestialObjectData has been modified, sets correct position
 	void UpdatePosition() {
 
-		SetMode();
+		SetViewMode(GameController.CurrentViewMode);
 
 	}
 	

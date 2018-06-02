@@ -24,6 +24,12 @@ public class SolarSystem : MonoBehaviour {
 	
 	// List of CelestialObject instances
 	private List<GameObject> _celestialObjects;
+	public List<GameObject> CelestialObjects {
+		get { return _celestialObjects; }
+	}
+	
+	// Refrence to the sun
+	private GameObject _sun;
 
 	// Use this for initialization
 	void Start () {
@@ -33,9 +39,9 @@ public class SolarSystem : MonoBehaviour {
 		
 		// Create instances of CelestialObject from loaded data
 		CreateCelestialObjects();
-		
-		// Initally set mode to size compare
-		SetMode();
+
+		// Grab the sun gameobject
+		_sun = transform.Find("Sun").gameObject;
 
 	}
 	
@@ -47,6 +53,7 @@ public class SolarSystem : MonoBehaviour {
 
 			for (var i = 0; i < _celestialObjects.Count; i++) {
 				_celestialObjects[i].GetComponent<CelestialObject>().ScaleModeSpacer = scaleModeSpacer;
+				
 			}
 			
 		}
@@ -82,7 +89,7 @@ public class SolarSystem : MonoBehaviour {
 		
 		for (var i = 0; i < _loadedCelestialObjectData.Count; i++) {
 			
-			print("Making " + _loadedCelestialObjectData[i].name);
+			//print("Making " + _loadedCelestialObjectData[i].name);
 			
 			GameObject celestialObject = (GameObject)Instantiate(celestialObjectPrefab, new Vector3(0, 0, 0), Quaternion.identity);
 			celestialObject.transform.parent = transform;
@@ -97,12 +104,26 @@ public class SolarSystem : MonoBehaviour {
 		
 	}
 
-	private void SetMode() {
+	// Change the viewing mode
+	public void SetViewMode(GameController.ViewMode mode) {
 
+		// Set scale of sun for each view mode
+		float sunSize = 250;
+		if (mode == GameController.ViewMode.ScaleCompare) {
+			_sun.transform.localScale = new Vector3(sunSize, sunSize, sunSize);
+		} else {
+			
+			// Divide by 1000 beacuse distance are in millions of miles
+			float scaledSize = sunSize * GameController.DistanceMultiplier / 1000;
+			_sun.transform.localScale = new Vector3(scaledSize, scaledSize, scaledSize);
+			
+			print("scaledSize = " + scaledSize);
+			
+		}
+		
+		// Set view mode for CelestialObjects
 		for (var i = 0; i < _celestialObjects.Count; i++) {
-
-			_celestialObjects[i].GetComponent<CelestialObject>().SetMode();
-
+			_celestialObjects[i].GetComponent<CelestialObject>().SetViewMode(mode);
 		}
 
 	}
