@@ -42,9 +42,8 @@
             fixed4 frag(v2f i) : SV_Target {
             
                 float fade = lerp(_ScaleFade, _DistanceFade, clamp(_FadeT, 0, 1));
-                
                 float distance = abs(i.worldPos.z * pow(fade, 7) * 0.001);
-                float alpha = 1.0 - distance;
+                float alpha = clamp(1.0 - distance, 0, 1);
                     
                 return fixed4(_Color.rgb, alpha * _Color.a);
                 

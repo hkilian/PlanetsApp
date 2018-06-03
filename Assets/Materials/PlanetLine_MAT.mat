@@ -58,7 +58,7 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DistanceFade: 0.95
+    - _DistanceFade: 1.19
     - _DstBlend: 0
     - _Fade: 1
     - _FadeT: 2.85
@@ -69,14 +69,14 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _ScaleFade: 1.43
+    - _ScaleFade: 1.39
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.5424528, g: 0.90669626, b: 1, a: 0.5254902}
+    - _Color: {r: 0.5424528, g: 0.90669626, b: 1, a: 0.5529412}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FarColor: {r: 0.5566038, g: 0.2966803, b: 0.2966803, a: 1}
     - _NearColor: {r: 0.7264151, g: 0.33922213, b: 0.33922213, a: 1}

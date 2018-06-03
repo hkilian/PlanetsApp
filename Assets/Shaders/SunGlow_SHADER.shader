@@ -58,10 +58,11 @@
 			{
 				
 				// Calculate distance to center of the quad
-			    float dis = distance(i.uv, float2(0.5, 0.5)) * 2.5;
+			    float dis = distance(i.uv, float2(0.5, 0.5));
                 
                 // Fade color out based on distance
-				fixed4 col = fixed4(_Color.r, _Color.g, _Color.b, (1-dis)*0.5);
+                float alpha = clamp((1.0-dis*2.0) - _Color.a, 0, 1);
+				fixed4 col = fixed4(_Color.r, _Color.g, _Color.b, alpha);
 				return col;
 				
 			}

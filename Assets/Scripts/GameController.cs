@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class GameController : MonoBehaviour {
 	
 	public float t = 0.0f;
@@ -29,9 +28,9 @@ public class GameController : MonoBehaviour {
 	// Instance for singleton patturn
 	private static GameController _instance;
 	public static GameController Instance { get { return _instance; } }
-
+	
 	// Multiply distances to keep them within within draw distance
-	private static float _distanceMultiplier = 1.0f;
+	private static float _distanceMultiplier = 0.1f;
 	public static float DistanceMultiplier { get { return _distanceMultiplier; } }
 	
 	private void Awake() {
@@ -47,26 +46,32 @@ public class GameController : MonoBehaviour {
 		// Load data and create objects
 		solarSystem.Init();
 				
-		// Crete UI from solarsystem
+		// Crete UI from solarsystem and set ranges for info scales(temp,gravity)
 		uiHandler.CreateButtons();
+		uiHandler.SetScaleRanges();
 		
 		// Set the view mode to scale compare at start
-		SetViewMode(ViewMode.ScaleCompare);
-			
+		_currentViewMode = ViewMode.ScaleCompare;
+
 	}
 
 	private void Update() {
+		
+		// Exit game
+		if (Input.GetKey("escape"))
+			Application.Quit();
 
+		// 
 		if (_currentViewMode == ViewMode.ScaleCompare) {
 
 			if (animationT > 0) {
-				animationT -= 0.01f;
+				animationT -= Time.deltaTime * 0.5f;
 			}
 			
 		} else {
 			
 			if (animationT < 1) {
-				animationT += 0.01f;
+				animationT += Time.deltaTime * 0.5f;
 			}
 		
 		}
@@ -74,22 +79,17 @@ public class GameController : MonoBehaviour {
 		float t = EasingFunction.EaseInOutCubic(0, 1, animationT);
 		cameraController.LerpBetweenViewModes(t);
 		solarSystem.LerpBetweenViewModes(t);
+		uiHandler.UpdateButtonPositions(t);
 
 	}
 
-	private void SetViewMode(ViewMode mode) {
-
-		_currentViewMode = mode;
-		solarSystem.SetViewMode(mode);
-
-	}
-
+	// Switch between scale and distance modes if not in inspect mode
 	public void ToggleViewMode() {
 		
 		if (_currentViewMode == ViewMode.ScaleCompare) {
-			SetViewMode(ViewMode.DistanceCompare);
+			_currentViewMode = ViewMode.DistanceCompare;
 		} else {
-			SetViewMode(ViewMode.ScaleCompare);
+			_currentViewMode = ViewMode.ScaleCompare;
 		}
 		
 	}

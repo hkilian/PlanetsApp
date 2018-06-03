@@ -33,8 +33,6 @@ public class CameraController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		
-
 	}
 	
 	// Lerp between scale and distance modes
@@ -47,9 +45,7 @@ public class CameraController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-			
-		DrawDebugLines();
-				
+							
 		Vector3 position = transform.position;
 		float orthoHeight = 270;
 		
@@ -86,15 +82,5 @@ public class CameraController : MonoBehaviour {
 
 	}
 	
-	// Find the top and bottom of the 
-
-	// Draws lines in the scene view to show where the screen is
-	private void DrawDebugLines() {
-		
-		Camera camera = GetComponent<Camera>();
-		
-		
-		
-	}
 	
 }

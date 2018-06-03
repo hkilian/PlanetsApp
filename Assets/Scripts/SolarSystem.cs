@@ -132,30 +132,5 @@ public class SolarSystem : MonoBehaviour {
 		
 	}
 
-	// Change the viewing mode
-	public void SetViewMode(GameController.ViewMode mode) {
-
-		/*
-		// Set scale of sun for each view mode
-		float sunSize = 250;
-		if (mode == GameController.ViewMode.ScaleCompare) {
-			_sun.transform.localScale = new Vector3(sunSize, sunSize, sunSize);
-		} else {
-			
-			// Divide by 1000 beacuse distance are in millions of miles
-			float scaledSize = sunSize * GameController.DistanceMultiplier / 1000;
-			_sun.transform.localScale = new Vector3(scaledSize, scaledSize, scaledSize);
-			
-			print("scaledSize = " + scaledSize);
-			
-		}
-		
-		// Set view mode for CelestialObjects
-		for (var i = 0; i < _celestialObjects.Count; i++) {
-			_celestialObjects[i].GetComponent<CelestialObject>().SetViewMode(mode);
-		}
-		*/
-		
-	}
 	
 }

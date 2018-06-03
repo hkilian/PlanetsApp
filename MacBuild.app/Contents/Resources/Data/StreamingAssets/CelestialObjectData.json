@@ -1,0 +1,85 @@
+{
+  "Items": [
+    {
+      "name": "Mercury",
+      "size": "2440", 
+      "distance": "57.91",
+      "color": "#ffff",
+      "temperature_low": "-170",
+      "temperature_high": "430",
+      "gravity": "3.7",
+      "moons": "0"
+    },
+    {
+      "name": "Venus",
+      "size": "6052", 
+      "distance": "108.2",
+      "color": "#ffff",
+      "temperature_low": "480",
+      "temperature_high": "480",
+      "gravity": "8.87",
+      "moons": "0"
+    },
+    {
+      "name": "Earth",
+      "size": "6371", 
+      "distance": "149.6",
+      "color": "#ffff",
+      "temperature_low": "-126",
+      "temperature_high": "58",
+      "gravity": "8.87",
+      "moons": "1"
+    },
+    {
+      "name": "Mars",
+      "size": "3390", 
+      "distance": "227.9",
+      "color": "#ffff",
+      "temperature_low": "−55",
+      "temperature_high": "20",
+      "gravity": "3.711",
+      "moons": "2"
+    },
+    {
+      "name": "Jupiter",
+      "size": "69911", 
+      "distance": "778.5",
+      "color": "#ffff",
+      "temperature_low": "-145",
+      "temperature_high": "40",
+      "gravity": "24.79",
+      "moons": "69"
+    },
+    {
+      "name": "Saturn",
+      "size": "58232", 
+      "distance": "1433.0",
+      "color": "#ffff",
+      "temperature_low": "-270",
+      "temperature_high": "-168",
+      "gravity": "10.44",
+      "moons": "62"
+    },
+    {
+      "name": "Uranus",
+      "size": "25362", 
+      "distance": "2871.0",
+      "color": "#ffff",
+      "temperature_low": "-224",
+      "temperature_high": "-216",
+      "gravity": "8.87",
+      "moons": "27"
+    },
+    {
+      "name": "Neptune",
+      "size": "24622", 
+      "distance": "4495.0",
+      "color": "#ffff",
+      "temperature_low": "-330",
+      "temperature_high": "-240",
+      "gravity": "11.15",
+      "moons": "14"
+    }
+
+  ]
+}
