@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 	
-	public float t = 0.0f;
-	
 	// 2 Types of viewing modes
 	public enum ViewMode {ScaleCompare, DistanceCompare};
 	
@@ -18,7 +16,7 @@ public class GameController : MonoBehaviour {
 	// Ref to uiHandler
 	public UiHandler uiHandler;
 	
-	// Used to animate the tranition between scale mode and distance mode
+	// Animation time used animate the transition between scale mode and distance mode
 	private float animationT = 0.0f;
 	
 	// Are we in scale mode or distance mode
@@ -52,6 +50,8 @@ public class GameController : MonoBehaviour {
 		
 		// Set the view mode to scale compare at start
 		_currentViewMode = ViewMode.ScaleCompare;
+		cameraController.LerpBetweenViewModes(0);
+		solarSystem.LerpBetweenViewModes(0);
 
 	}
 
@@ -61,24 +61,35 @@ public class GameController : MonoBehaviour {
 		if (Input.GetKey("escape"))
 			Application.Quit();
 
-		// 
+		// Increase or decrease the animationT depending on ViewMode
+		bool animating = false;
 		if (_currentViewMode == ViewMode.ScaleCompare) {
 
 			if (animationT > 0) {
+				animating = true;
 				animationT -= Time.deltaTime * 0.5f;
 			}
 			
 		} else {
 			
 			if (animationT < 1) {
+				animating = true;
 				animationT += Time.deltaTime * 0.5f;
 			}
 		
 		}
 
+		// Add an easing to the transition
 		float t = EasingFunction.EaseInOutCubic(0, 1, animationT);
-		cameraController.LerpBetweenViewModes(t);
-		solarSystem.LerpBetweenViewModes(t);
+		
+		// Only run if animating or if we are in editor so we can see changes live
+		if (animating || Application.isEditor) {
+			
+			cameraController.LerpBetweenViewModes(t);
+			solarSystem.LerpBetweenViewModes(t);
+			
+		}
+		
 		uiHandler.UpdateButtonPositions(t);
 
 	}
@@ -88,8 +99,10 @@ public class GameController : MonoBehaviour {
 		
 		if (_currentViewMode == ViewMode.ScaleCompare) {
 			_currentViewMode = ViewMode.DistanceCompare;
+			uiHandler.SetToggleText("SHOW SCALE");
 		} else {
 			_currentViewMode = ViewMode.ScaleCompare;
+			uiHandler.SetToggleText("SHOW DISTANCE");
 		}
 		
 	}

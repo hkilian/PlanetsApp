@@ -38,11 +38,6 @@ public class CelestialObject : MonoBehaviour {
 		}
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	// 0 being Scale mode and 1 being distance mode
 	public void LerpViewMode(float t) {

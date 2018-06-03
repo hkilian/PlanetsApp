@@ -19,7 +19,6 @@ public class CameraController : MonoBehaviour {
 	// Same as above but for distance mode
 	public float DistanceFurthestObjectSpacer = 500.0f;
 	public float DistanceSunSpacer = 500.0f;
-
 	[Space(10)]
 
 	// Used for lerping between modes

@@ -174,5 +174,9 @@ public class UiHandler : MonoBehaviour {
 		buttonContainer.SetActive(true);
 		modeToggle.SetActive(true);
 	}
+
+	public void SetToggleText(string text) {
+		modeToggle.transform.Find("Text").GetComponent<Text>().text = text;
+	}
 	
 }
