@@ -7,13 +7,8 @@ public class GameController : MonoBehaviour {
 	// 2 Types of viewing modes
 	public enum ViewMode {ScaleCompare, DistanceCompare};
 	
-	// Hold ref to solar system
 	public SolarSystem solarSystem;
-
-	// Ref to camera controller
 	public CameraController cameraController;
-	
-	// Ref to uiHandler
 	public UiHandler uiHandler;
 	
 	// Animation time used animate the transition between scale mode and distance mode
@@ -23,7 +18,7 @@ public class GameController : MonoBehaviour {
 	private static ViewMode _currentViewMode;
 	public static ViewMode CurrentViewMode { get { return _currentViewMode; } }
 	
-	// Instance for singleton patturn
+	// Instance for singleton
 	private static GameController _instance;
 	public static GameController Instance { get { return _instance; } }
 	
